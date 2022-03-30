@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import HomePage from "../HomePage/HomePage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import HabitsPage from "../HabitsPage/HabitsPage";
+import Today from "../TodayPage/Today";
 
 
 export default function App(){
@@ -11,6 +12,7 @@ export default function App(){
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="register" element={<RegisterPage />} />
+				<Route path="today" element={<Today />} />
                 <Route path="habits" element={<HabitsPage />} />
             </Routes>
             <GlobalStyle/>

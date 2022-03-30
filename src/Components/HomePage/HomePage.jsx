@@ -1,13 +1,16 @@
 import {useState, useEffect, useContext} from 'react';
 import styled from "styled-components";
 import trackit from "../../assets/img/trackit.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
+
+//lucasnkz11@gmail.com
+//123456
+
 export default function HomePage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log(email)
-
+    const navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();
         let token = 0 
@@ -25,6 +28,8 @@ export default function HomePage() {
         promise.then(response => {
             token = response.data.token
             console.log(response.data)
+            console.log(token)
+            navigate("/today")
         })
         promise.catch(error => {
             console.log(error.response)
