@@ -1,19 +1,48 @@
+import {useState, useEffect, useContext} from 'react';
 import styled from "styled-components";
 import trackit from "../../assets/img/trackit.png";
 import { Link } from "react-router-dom";
+import axios from "axios"
 export default function HomePage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    console.log(email)
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        let token = 0 
+        // const config ={
+        //     headers: {
+        //         "Authorization": `Bearer ${token}`
+        //     }
+        // }
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+        const info = {
+            email,
+            password
+        }
+        const promise = axios.post(URL,info)
+        promise.then(response => {
+            token = response.data.token
+            console.log(response.data)
+        })
+        promise.catch(error => {
+            console.log(error.response)
+        })
+    }
+
+
   return (
     <PageContainer>
         <img src={`${trackit}`} alt="" />
 
-        <form action="">
+        <form onSubmit={handleSubmit}>
             <label htmlFor=""></label>
-            <input type="text" name="" id="" placeholder="email"/>
+              <input type="text" name="email" id="email" placeholder="email" value={email} onChange={e => { setEmail(e.target.value) }}/>
             <label htmlFor=""></label>
-            <input type="text" name="" id="" placeholder="senha"/>
-            <Link to="/Habits"> 
+              <input type="text" name="password" id="password" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
+            
                 <button type="submit">Entrar</button>
-            </Link>
         </form>
         <Link to="/register">
             <span className="register">Não tem uma conta? Cadastre-se!</span>

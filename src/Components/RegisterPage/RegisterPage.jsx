@@ -1,20 +1,48 @@
+import {useState, useEffect} from 'react';
 import styled from "styled-components"
 import trackit from "../../assets/img/trackit.png"
 import { Link } from "react-router-dom";
+import axios from "axios"
 export default function RegisterPage() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [image,setImage] = useState('');
+    
+    
+    function handleSubmit(event) {
+        event.preventDefault();
+        
+        const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
+        const data = {
+            email: email,
+            name: name,
+            image: image,
+            password: password
+        }
+        const promise = axios.post(URL,data)
+        promise.then(response => {
+            console.log(response.response)
+        })
+        promise.catch(error => {
+            console.log(error.response.data)
+        })
+    }
+
+
   return (
     <PageContainer>
         <img src={`${trackit}`} alt="" />
-        <form action="">
-              <label htmlFor=""></label>
-              <input type="text" name="" id="" placeholder="email" />
-              <label htmlFor=""></label>
-              <input type="text" name="" id="" placeholder="senha" />
-              <label htmlFor=""></label>
-              <input type="text" name="" id="" placeholder="nome" />
-              <label htmlFor=""></label>
-              <input type="text" name="" id="" placeholder="foto" />
-              <button type="submit">Cadastrar</button>
+          <form onSubmit={handleSubmit}>
+              <label htmlFor="email"></label>
+                <input type="text" name="email" id="email" placeholder="email"  value={email} onChange={e => {setEmail(e.target.value)}} />
+              <label htmlFor="password"></label>
+                <input type="password" name="password" id="" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
+              <label htmlFor="name"></label>
+                <input type="text" name="name" id="name" placeholder="name" value={name} onChange={e => { setName(e.target.value) }}/>
+              <label htmlFor="image"></label>
+                <input type="text" name="image" id="image" placeholder="image" value={image} onChange={e => { setImage(e.target.value) }}/>
+              <button type="submit">Register</button>
         </form>
         <Link to="/">
             <span className="registered">Já tem uma conta? Faça login!</span>

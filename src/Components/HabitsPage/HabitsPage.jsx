@@ -22,6 +22,7 @@ const PageContainer = styled.div`
   flex-direction: column;
   background-color:#F2F2F2;
   height: 100vh;
+  
   .myHabits{
     display: flex;
     justify-content: space-between;
