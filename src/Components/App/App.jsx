@@ -4,19 +4,21 @@ import HomePage from "../HomePage/HomePage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import HabitsPage from "../HabitsPage/HabitsPage";
 import Today from "../TodayPage/Today";
-
+import UserProvider from "../Contexts/UserContext";
 
 export default function App(){
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="register" element={<RegisterPage />} />
-				<Route path="today" element={<Today />} />
-                <Route path="habits" element={<HabitsPage />} />
-            </Routes>
-            <GlobalStyle/>
-        </BrowserRouter> 
+		<UserProvider>
+			<BrowserRouter>
+				<Routes>
+						<Route path="/" element={<HomePage />} />
+						<Route path="register" element={<RegisterPage />} />
+						<Route path="today" element={<Today />} />
+						<Route path="habits" element={<HabitsPage />} />
+				</Routes>
+				<GlobalStyle/>
+			</BrowserRouter> 
+		</UserProvider>
     );
 }
 const GlobalStyle = createGlobalStyle`
