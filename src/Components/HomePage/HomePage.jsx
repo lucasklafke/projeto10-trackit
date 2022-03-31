@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
 
-import {useUser} from '../Contexts/UserContext'
+import {useToken} from '../Contexts/UserContext'
 
-import { UserContext } from '../Contexts/UserContext';
 import trackit from "../../assets/img/trackit.png";
 
 //lucasnkz11@gmail.com
@@ -15,7 +14,7 @@ export default function HomePage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const {user,setUser} = useUser()
+    const {token,setToken} = useToken()
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -35,8 +34,8 @@ export default function HomePage() {
             token = response.data.token
             // console.log(response.data)
             // console.log(token)
-            setUser(response.data.token)
-            console.log(user)
+            setToken(response.data.token)
+            console.log(token)
             navigate("/today")
         })
         promise.catch(error => {

@@ -3,18 +3,18 @@ import { createContext, useState ,useContext} from "react";
 export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   return (
-    <UserContext.Provider value={{user, setUser}}>
+    <UserContext.Provider value={{token, setToken}}>
       {children}
     </UserContext.Provider>
   );
 }
 
 
-export function useUser(){
+export function useToken(){
     const context = useContext(UserContext);
-    const {user, setUser} = context;
-    return {user, setUser}
+    const {token,setToken} = context;
+    return {token, setToken}
 }
