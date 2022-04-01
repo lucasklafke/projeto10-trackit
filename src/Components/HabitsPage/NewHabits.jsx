@@ -5,6 +5,7 @@ import axios from "axios"
 
 import Header from '../PublicComponents/Header'
 import Footer from '../PublicComponents/Footer'
+import Button from "./Button";
 
 export default function NewHabit(props){
     const [habit, setHabit] = useState([])
@@ -45,27 +46,16 @@ export default function NewHabit(props){
     function setSelected(event,index){
         setDays(days.concat(index + 1))
     }
-    function toggleBackground(background){
-        if(background == null){
-            return "white"
-        } else{
-            if(background == "white"){
-                return background = "lightgray"
-            } else{
-                return background = "white";
-            }
-        }
-    }
     return(
         <PageContainer>
             <Content>
                 <input type="text" value={habit} onChange={e => setHabit(e.target.value)} />
                 <div className="days">
                     {week.map((day, index) =>{
-                        const background = null
+                        const background = "white"
                         const color = "gray"
                         return (
-                            <Button onClick={e => setSelected(e, index, background)} background={toggleBackground(background)}>{day}</Button>
+                            <Button day={day} setDays={setDays} days={days} index={index}/>
                         )
                     })}
                 </div>
@@ -139,15 +129,4 @@ const Content = styled.div`
         }
 
     }
-`
-const Button = styled.button`
-    margin-right: 5px;
-    align-items: center;
-    width: 20px;
-    margin-right: 5px;
-    background-color: ${ props => props.background};
-    border: 1px solid #D5D5D5;
-    box-sizing: border - box;
-    border-radius: 5px;
-    color: ${props => props.fontcolor };
 `

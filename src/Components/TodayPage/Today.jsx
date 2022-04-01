@@ -30,12 +30,24 @@ export default function Today(){
     return (
         <PageContainer>
             <Header />
-            
-            <h1>{dayjs().locale('pt-br').format('dddd, DD/MM')}</h1>
+            <PageContainer>
+                <h2>{dayjs().locale('pt-br').format('dddd, DD/MM')}</h2>
+                <span>Buenas noitches</span>
+            </PageContainer>
             <Footer />
         </PageContainer>
     )
 }
 const PageContainer = styled.div`
+    h2{
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 22.976px;
+        line-height: 29px;
+        /* identical to box height */
 
+
+        color: #126BA5;
+    }
 `

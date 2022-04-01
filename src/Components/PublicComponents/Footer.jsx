@@ -12,19 +12,23 @@ export default function Footer() {
         <Link to="/habits">
             <span>Hábitos</span>
         </Link>
-          <CircularProgressbar
-              value={percentage}
-              text="Hoje"
-              background
-              backgroundPadding={6}
-              styles={buildStyles({
-                  backgroundColor: "#3e98c7",
-                  textColor: "#fff",
-                  pathColor: "#fff",
-                  trailColor: "transparent"
-              })}
-          />
-        <span>Histórico</span>
+        <Link to="/today">
+            <CircularProgressbar
+                value={percentage}
+                text="Hoje"
+                background
+                backgroundPadding={6}
+                styles={buildStyles({
+                    backgroundColor: "#3e98c7",
+                    textColor: "#fff",
+                    pathColor: "#fff",
+                    trailColor: "transparent"
+                })}
+            />
+        </Link>
+          <Link to="/record">
+            <span>Histórico</span>
+          </Link>
     </FooterContainer>
     );
 }

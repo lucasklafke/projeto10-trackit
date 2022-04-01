@@ -5,6 +5,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import HabitsPage from "../HabitsPage/HabitsPage";
 import Today from "../TodayPage/Today";
 import UserProvider from "../Contexts/UserContext";
+import RecordPage from "../HabitRecordPage/RecordPage";
 
 export default function App(){
     return (
@@ -15,6 +16,7 @@ export default function App(){
 						<Route path="register" element={<RegisterPage />} />
 						<Route path="today" element={<Today />} />
 						<Route path="habits" element={<HabitsPage />} />
+						<Route path="record" element={<RecordPage/>} />
 				</Routes>
 				<GlobalStyle/>
 			</BrowserRouter> 
