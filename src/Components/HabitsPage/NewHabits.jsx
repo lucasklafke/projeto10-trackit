@@ -10,6 +10,7 @@ export default function NewHabit(props){
     const [habit, setHabit] = useState([])
     const [days,setDays] = useState([])
     const {token} = useToken()
+    const week = ["D", "S", "T", "Q", "Q", "S", "S"]
     function clearForm(){
         setHabit([])
         setDays([])
@@ -41,18 +42,32 @@ export default function NewHabit(props){
             props.setNewHabit(false)
         })
     }
+    function setSelected(event,index){
+        setDays(days.concat(index + 1))
+    }
+    function toggleBackground(background){
+        if(background == null){
+            return "white"
+        } else{
+            if(background == "white"){
+                return background = "lightgray"
+            } else{
+                return background = "white";
+            }
+        }
+    }
     return(
         <PageContainer>
             <Content>
                 <input type="text" value={habit} onChange={e => setHabit(e.target.value)} />
                 <div className="days">
-                    <button onClick={() => setDays(days.concat(1) )}>D</button>
-                    <button onClick={() => setDays(days.concat(2))}>S</button>
-                    <button onClick={() => setDays(days.concat(3))}>T</button>
-                    <button onClick={() => setDays(days.concat(4))}>Q</button>
-                    <button onClick={() => setDays(days.concat(5))}>Q</button>
-                    <button onClick={() => setDays(days.concat(6))}>S</button>
-                    <button onClick={() => setDays(days.concat(7))}>S</button>
+                    {week.map((day, index) =>{
+                        const background = null
+                        const color = "gray"
+                        return (
+                            <Button onClick={e => setSelected(e, index, background)} background={toggleBackground(background)}>{day}</Button>
+                        )
+                    })}
                 </div>
                 <div className="continue">
                     <button>Cancel</button>
@@ -96,6 +111,14 @@ const Content = styled.div`
 
         button{
             margin-right: 5px;
+            align-items: center;
+            width: 20px;
+            margin-right: 5px;
+            background-color: ${ props => props.background};
+            border: 1px solid #D5D5D5;
+            box-sizing: border - box;
+            border-radius: 5px;
+            color: ${props => props.fontcolor };
         }
     }
     .continue{
@@ -116,4 +139,15 @@ const Content = styled.div`
         }
 
     }
+`
+const Button = styled.button`
+    margin-right: 5px;
+    align-items: center;
+    width: 20px;
+    margin-right: 5px;
+    background-color: ${ props => props.background};
+    border: 1px solid #D5D5D5;
+    box-sizing: border - box;
+    border-radius: 5px;
+    color: ${props => props.fontcolor };
 `

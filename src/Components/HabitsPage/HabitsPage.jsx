@@ -12,10 +12,20 @@ import Footer from '../PublicComponents/Footer'
 export default function HabitsPage() {
   const [habits, setHabits] = useState([])
   const [newHabit,setNewHabit] = useState(false)
-
+  const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const { token } = useToken()
   const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
+  console.log(habits)
 
+  function isSelected(habit, index) {
+    const {days} = habit
+    const selected = days.filter(day => day == index+1)
+    if(selected.length > 0) {
+      return false
+    } else{
+      return true
+    }
+  }
   function getHabits() {
     const config = {
       headers: {
@@ -48,23 +58,21 @@ export default function HabitsPage() {
         <Content>
           {
             habits.length === 0 ? 
-              <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span>
-            : habits.map(habit => 
-              <Habit>
-                <span>{habit.name}</span>
-                <div className="days">
-                  <Button>D</Button>
-                  <Button>S</Button>
-                  <Button>T</Button>
-                  <Button>Q</Button>
-                  <Button>Q</Button>
-                  <Button>S</Button>
-                  <Button>S</Button>
-                </div>
-                <icons.BsTrash className="trash"/>
-              </Habit>)
-          }
-          
+              <span>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</span> 
+            :
+              habits.map(habit => 
+                <Habit>
+                  <span>{habit.name}</span>
+                  <div className="days">
+                    {week.map((day, index) => <Button 
+                      key={index} 
+                      background={ !isSelected(habit,index) ? "#CFCFCF" : "white"}
+                      fontcolor={isSelected(habit, index)? "#CFCFCF" : "white"}
+                      >{day}</Button>)}
+                  </div>
+                  <icons.BsTrash className="trash"/>
+                </Habit>)
+          }    
         </Content>
       }
       <Footer/>
@@ -146,6 +154,12 @@ const Habit = styled.div`
   }
 `
 const Button = styled.button`
+  align-items: center;
   width: 20px;
   margin-right: 5px;
+  background-color: ${props => props.background};
+  border: 1px solid #D5D5D5;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: ${props => props.fontcolor};
 `
