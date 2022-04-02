@@ -4,9 +4,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
 
 
-export default function Footer() {
+export default function Footer(props) {
     
-    let percentage = 3;
+    let percentage = props.progress
   return (
     <FooterContainer>
         <Link to="/habits">
@@ -45,12 +45,11 @@ const FooterContainer = styled.div`
     background: #FFFFFF;
 
     .CircularProgressbar{
-        position: absolute;
         width: 91px;
         height: 91px;
         background-color: #52B6FF;
         border-radius: 50%;
         color: white;
-        top: -35px;
+        margin-bottom:70px;
     }
 `
