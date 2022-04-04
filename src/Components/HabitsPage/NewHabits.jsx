@@ -30,7 +30,6 @@ export default function NewHabit(props){
             name:habit,
             days:days
         }
-        console.log(obj)
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
         const promise = axios.post(url,obj,config)
         promise.then(response => {
@@ -42,12 +41,15 @@ export default function NewHabit(props){
             props.getHabits()
         })
         promise.catch(error => {
-            console.log(error.response)
             setTimeout( () => alert('Erro ao cadastrar hábito'), 3000);
             setTimeout(() => setLoading(false), 3000);
             setTimeout(() => clearForm(), 3000);
             setTimeout(  () =>  clearForm(),3000)
         })
+    }
+    function cancelNewHabit(){
+        clearForm()
+        props.setNewHabit(false)
     }
     function setSelected(event,index){
         setDays(days.concat(index + 1))
@@ -66,8 +68,11 @@ export default function NewHabit(props){
                     })}
                 </div>
                 <div className="continue">
-                    <button>Cancel</button>
-                    {loading ? <button ><ThreeDots color='white' /></button> : <button onClick={handleSubmit}>Save</button>}
+                    <button className="cancelButton" onClick={cancelNewHabit}>Cancel</button>
+                    {loading 
+                        ? <SaveButton background="#86CCFF" ><ThreeDots color='white' width={30} height={30} /></SaveButton >
+                        : <SaveButton onClick={handleSubmit} background="#52B6FF">Save</SaveButton >
+                    }
                 </div>
             </Content>
         </PageContainer>
@@ -105,34 +110,32 @@ const Content = styled.div`
         left: 25px;
         top: 75px;
 
-        button{
-            margin-right: 5px;
-            align-items: center;
-            width: 20px;
-            margin-right: 5px;
-            background-color: ${ props => props.background};
-            border: 1px solid #D5D5D5;
-            box-sizing: border - box;
-            border-radius: 5px;
-            color: ${props => props.fontcolor };
-        }
+       
     }
     .continue{
         position: absolute;
         bottom: 15px;
         right: 15px;
-
-        button{
-            width: 84px;
-            height: 35px;
-            left: 257px;
-            top: 277px;
-            color: white;
-            background: #52B6FF;
-            border-radius: 4.63636px;
-            border: none;
-            margin-left: 20px;
-        }
-
+        display: flex;
     }
+    .cancelButton{
+        width: 84px;
+        height: 35px;
+        color: #52B6FF;
+        border-radius: 4.63636px;
+        border: none;
+        background-color: white;
+    }
+`
+const SaveButton = styled.button`
+    background-color: ${ props => props.background};
+    width: 84px;
+    height: 35px;
+    color: white;
+    border-radius: 4.63636px;
+    border: none;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

@@ -38,11 +38,10 @@ export default function Habit(props){
         const promise = isHabitDone  == false ? axios.post(checkURL,{},config) : axios.post(uncheckURL,{},config)
         promise.then(response => {
             background === "#EBEBEB" ? setBackground("#8FC549") : setBackground("#EBEBEB")
-            alert(`${response.data.message}`)
             calcProgress(!isHabitDone)
+            
         })
         promise.catch(error => {
-            console.log(error.response)
         })
     }
     return (

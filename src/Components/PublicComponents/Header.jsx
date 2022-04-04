@@ -3,7 +3,6 @@ import bob from "../../assets/img/bob.png"
 import {useURL} from "../Contexts/UserContext"
 export default function Header(){
     const {URL} = useURL()
-    console.log(URL)
     return(
         <HeaderContainer>
             <span>Trackit</span>

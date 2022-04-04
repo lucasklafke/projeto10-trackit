@@ -15,7 +15,6 @@ export default function HabitsPage() {
   const week = ["D", "S", "T", "Q", "Q", "S", "S"]
   const { token } = useToken()
   const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
-  console.log(habits)
 
   function isSelected(habit, index) {
     const {days} = habit
@@ -37,7 +36,6 @@ export default function HabitsPage() {
       setHabits(response.data)
     })
     promise.catch(error => {
-      console.log(error)
     })
   }
   function deleteHabit(id){
@@ -54,7 +52,6 @@ export default function HabitsPage() {
         getHabits()
       })
       promise.catch(error => {
-        console.log(error)
       })
     }
   }

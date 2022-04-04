@@ -26,12 +26,8 @@ export default function Today(){
             setHabits(response.data)
             const filtrados = filterProgress(response.data)
             setProgress((filtrados.length/response.data.length)*100)
-            console.log(filtrados.length)
-            console.log(response.data.length)
-            console.log(2/3)
         })
         promise.catch(error => {
-            console.log(error)
         })
         
     },[])

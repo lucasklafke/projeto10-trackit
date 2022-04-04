@@ -35,15 +35,11 @@ export default function HomePage() {
         const promise = axios.post(URL,info)
         promise.then(response => {
             token = response.data.token
-            console.log(response.data)
-            // console.log(token)
             setToken(response.data.token)
             setURL(response.data.image)
-            console.log(token)
             setTimeout(()=> navigate("/today"),2000)
         })
         promise.catch(error => {
-            console.log(error.response)
             setTimeout(() => setLoading(false), 2000);
         })
     }
@@ -58,7 +54,7 @@ export default function HomePage() {
               <input type="text" name="email" id="email" placeholder="email" value={email} onChange={e => { setEmail(e.target.value) }}/>
             <label htmlFor=""></label>
               <input type="text" name="password" id="password" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
-              {loading ? <button disabled><ThreeDots color='white'/></button> : <button type="submit">Entrar</button>}
+              {loading ? <Button disabled background="#86CCFF"><ThreeDots color='white' /></Button> : <Button type="submit" background="#53B6FF">Entrar</Button>}
         </form>
         <Link to="/register">   
             <span className="register">Não tem uma conta? Cadastre-se!</span>
@@ -94,19 +90,6 @@ const PageContainer = styled.div`
         border-radius: 5px;
         margin-bottom: 5px;
     }
-    button{
-        width: 303px;
-        height: 45px;
-        left: 36px;
-        top: 381px;
-        color: white;
-        background: #52B6FF;
-        border-radius: 4.63636px;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
     .register{
         width: 232px;
         height: 17px;
@@ -122,4 +105,18 @@ const PageContainer = styled.div`
         color: #52B6FF;
 
     }
+`
+
+const Button = styled.button`
+    width: 303px;
+    height: 45px;
+    left: 36px;
+    top: 381px;
+    color: white;
+    background: ${props => props.background};
+    border-radius: 4.63636px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

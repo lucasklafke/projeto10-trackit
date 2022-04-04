@@ -44,6 +44,17 @@ const FooterContainer = styled.div`
     bottom: 0;
     background: #FFFFFF;
     margin-top: 100px;
+    span{
+        text-decoration: none;
+        text-decoration-line: none;
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 17.976px;
+        line-height: 22px;
+        text-align: center;
+        color: #52B6FF;
+    }
     .CircularProgressbar{
         width: 91px;
         height: 91px;

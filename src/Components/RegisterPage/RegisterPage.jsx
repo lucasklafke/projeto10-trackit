@@ -25,11 +25,9 @@ export default function RegisterPage() {
         }
         const promise = axios.post(URL,data)
         promise.then(response => {
-          console.log(response.response)
           setTimeout(() => navigate("/"), 2000);
         })
         promise.catch(error => {
-            console.log(error.response.data)
             setTimeout(() => setLoading(false), 2000);
         })
     }
@@ -47,7 +45,7 @@ export default function RegisterPage() {
                 <input type="text" name="name" id="name" placeholder="name" value={name} onChange={e => { setName(e.target.value) }}/>
               <label htmlFor="image"></label>
                 <input type="text" name="image" id="image" placeholder="image" value={image} onChange={e => { setImage(e.target.value) }}/>
-                {loading ? <button disabled> <ThreeDots color="#fff" /></button> : <button type="submit">Register</button>}
+        {loading ? <Button disabled background="#86CCFF"> <ThreeDots color="#fff" /></Button> : <Button type="submit" background="#53B6FF">Register</Button>}
         </form>
         <Link to="/">
             <span className="registered">Já tem uma conta? Faça login!</span>
@@ -111,4 +109,17 @@ const PageContainer = styled.div`
         color: #52B6FF;
 
     }
+`
+const Button = styled.button`
+    width: 303px;
+    height: 45px;
+    left: 36px;
+    top: 381px;
+    color: white;
+    background: ${props => props.background};
+    border-radius: 4.63636px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
