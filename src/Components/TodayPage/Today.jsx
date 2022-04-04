@@ -2,7 +2,7 @@ import * as dayjs from 'dayjs'
 import styled from "styled-components"
 import { useEffect, useState } from 'react'
 import axios from "axios"
-import { useToken, useURL,useProgress} from '../Contexts/UserContext'
+import { useToken, useURL,useProgress,useHabits} from '../Contexts/UserContext'
 import { ThreeDots } from 'react-loader-spinner'
 
 
@@ -13,7 +13,7 @@ import Habit from "./Habit"
 
 
 export default function Today(){
-    const [habits,setHabits] = useState([])
+    const{habits,setHabits} = useHabits()
     const {progress, setProgress} = useProgress()
     const {token} = useToken()
     useEffect( () =>{

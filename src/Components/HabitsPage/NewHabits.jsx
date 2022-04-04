@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useState } from "react"
-import { useToken } from "../Contexts/UserContext"
+import { useToken ,useHabits, useProgress} from "../Contexts/UserContext"
 import axios from "axios"
 import { ThreeDots } from "react-loader-spinner"
 
@@ -14,6 +14,21 @@ export default function NewHabit(props){
     const {token} = useToken()
     const week = ["D", "S", "T", "Q", "Q", "S", "S"]
     const [loading, setLoading] = useState(false)
+    const {habits,setHabits} = useHabits()
+    const {progress,setProgress} = useProgress()
+    function filterProgress(habits) {
+        const progress = habits.filter(habit => {
+            return habit.done === true
+        })
+        return progress
+    }
+    function updateProgress(){
+        const done = filterProgress(habits) 
+        const doneLength = done.length
+        const length = habits.length
+        setProgress(100 / (length+1) * doneLength)
+        console.log(100 / (length + 1) *doneLength)
+    }
 
     function clearForm(){
         setHabit([])
@@ -39,6 +54,7 @@ export default function NewHabit(props){
             setTimeout(() => props.setNewHabit(false), 3000);
             setTimeout(() => setLoading(false), 3000);
             props.getHabits()
+            updateProgress()
         })
         promise.catch(error => {
             setTimeout( () => alert('Erro ao cadastrar hábito'), 3000);
