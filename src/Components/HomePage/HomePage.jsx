@@ -53,7 +53,7 @@ export default function HomePage() {
             <label htmlFor=""></label>
               <input type="text" name="email" id="email" placeholder="email" value={email} onChange={e => { setEmail(e.target.value) }}/>
             <label htmlFor=""></label>
-              <input type="text" name="password" id="password" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
+              <input type="password" name="password" id="password" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
               {loading ? <Button disabled background="#86CCFF"><ThreeDots color='white' /></Button> : <Button type="submit" background="#53B6FF">Entrar</Button>}
         </form>
         <Link to="/register">   
@@ -119,4 +119,5 @@ const Button = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Lexend Deca';
 `

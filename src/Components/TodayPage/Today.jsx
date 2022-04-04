@@ -2,8 +2,10 @@ import * as dayjs from 'dayjs'
 import styled from "styled-components"
 import { useEffect, useState } from 'react'
 import axios from "axios"
-import { useToken, useURL} from '../Contexts/UserContext'
+import { useToken, useURL,useProgress} from '../Contexts/UserContext'
 import { ThreeDots } from 'react-loader-spinner'
+
+
 
 import Header from "../PublicComponents/Header"
 import Footer from "../PublicComponents/Footer"
@@ -12,7 +14,7 @@ import Habit from "./Habit"
 
 export default function Today(){
     const [habits,setHabits] = useState([])
-    const [progress, setProgress] = useState(0)
+    const {progress, setProgress} = useProgress()
     const {token} = useToken()
     useEffect( () =>{
         const config = {
@@ -59,7 +61,7 @@ export default function Today(){
                     </div>
                 </div>
             </Content>
-            <Footer progress={progress} />
+            <Footer />
         </PageContainer>
     )
 }
@@ -98,4 +100,9 @@ const Content = styled.div`
 `
 const H4 = styled.h4`
     color: ${props => props.color};
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
     `

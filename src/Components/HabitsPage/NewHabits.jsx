@@ -125,6 +125,7 @@ const Content = styled.div`
         border-radius: 4.63636px;
         border: none;
         background-color: white;
+        font-family: 'Lexend Deca';
     }
 `
 const SaveButton = styled.button`
@@ -138,4 +139,5 @@ const SaveButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Lexend Deca';
 `

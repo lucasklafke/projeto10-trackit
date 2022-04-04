@@ -18,7 +18,7 @@ export default function HabitsPage() {
 
   function isSelected(habit, index) {
     const {days} = habit
-    const selected = days.filter(day => day == index+1)
+    const selected = days.filter(day => day == index)
     if(selected.length > 0) {
       return false
     } else{
@@ -173,7 +173,8 @@ const Habit = styled.div`
 `
 const Button = styled.button`
   align-items: center;
-  width: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 5px;
   background-color: ${props => props.background};
   border: 1px solid #D5D5D5;

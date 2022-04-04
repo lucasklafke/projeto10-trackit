@@ -7,12 +7,12 @@ export default function Button(props){
   function setSelected(){
     setBackground("#CFCFCF;")
     setColor("white")
-    setDays(days.concat(index+1))
+    setDays(days.concat(index))
   }
   function setUnselected(){
     setBackground("white")
     setColor("gray")
-    setDays(days.filter(() => index+1))
+    setDays(days.filter(() => index))
   }
   function handleClick(){
     background == "white" ? 
@@ -28,7 +28,8 @@ export default function Button(props){
 
 const Buttons = styled.button`
   align-items: center;
-  width: 20px;
+  width: 30px;
+  height: 30px;
   margin-right: 5px;
   background-color: ${props => props.background};
   border: 1px solid #D5D5D5;

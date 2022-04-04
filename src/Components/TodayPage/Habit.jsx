@@ -2,12 +2,12 @@ import styled from "styled-components"
 import { IoCheckbox } from "react-icons/io5"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { useToken } from "../Contexts/UserContext"
+import { useToken ,useProgress} from "../Contexts/UserContext"
 
 
 export default function Habit(props){
-    const { title, sequence, record, habitState, habitId,setProgress,progress,length} = props
-
+    const { title, sequence, record, habitState, habitId,length} = props
+    const {progress,setProgress} = useProgress()
     const [isHabitDone, setIsHabitDone] = useState(habitState)
     const [background, setBackground ] = useState("white")
     const {token} = useToken()
