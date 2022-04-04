@@ -40,7 +40,24 @@ export default function HabitsPage() {
       console.log(error)
     })
   }
-  
+  function deleteHabit(id){
+    const answer = window.confirm("Do you really want delete this habit?")
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    }
+    if(answer){
+      const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
+      const promise = axios.delete(URL, config)
+      promise.then(response => {
+        getHabits()
+      })
+      promise.catch(error => {
+        console.log(error)
+      })
+    }
+  }
   useEffect(() => {
     getHabits()
   },[])
@@ -70,7 +87,7 @@ export default function HabitsPage() {
                       fontcolor={isSelected(habit, index)? "#CFCFCF" : "white"}
                       >{day}</Button>)}
                   </div>
-                  <icons.BsTrash className="trash"/>
+                  <icons.BsTrash className="trash" onClick={() => deleteHabit(habit.id)}/>
                 </Habit>)
           }    
         </Content>
@@ -86,12 +103,13 @@ const PageContainer = styled.div`
   align-items: center;
   background-color:#F2F2F2;
   height: 100vh;
+  overflow-y: scroll;
   
   .myHabits{
     display: flex;
     justify-content: space-between;
     width: 90%;
-    margin: 30px 0;
+    margin-top: 100px;
   }
   h2{
     
@@ -117,7 +135,8 @@ const Content = styled.div`
   align-items: center;
   width: 90%;
   box-sizing: border-box;
-
+  margin-top: 20px;
+  margin-bottom:120px ;
   span{
     font-family: 'Lexend Deca';
     font-style: normal;
@@ -136,6 +155,8 @@ const Habit = styled.div`
   height: 90px;
   background-color: white;
   position: relative;
+  margin-top: 10px;
+  border-radius: 5px;
   span{
       width: 300px;
       box-sizing: border-box;

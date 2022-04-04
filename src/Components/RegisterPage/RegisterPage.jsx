@@ -1,18 +1,21 @@
 import {useState, useEffect} from 'react';
 import styled from "styled-components"
-import trackit from "../../assets/img/trackit.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
+import { ThreeDots } from 'react-loader-spinner';
+import trackit from "../../assets/img/trackit.png"
 export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [image,setImage] = useState('');
+    const [loading, setLoading] = useState(false);
     
-    
+  const navigate = useNavigate()
+
     function handleSubmit(event) {
         event.preventDefault();
-        
+        setLoading(true);
         const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
         const data = {
             email: email,
@@ -22,10 +25,12 @@ export default function RegisterPage() {
         }
         const promise = axios.post(URL,data)
         promise.then(response => {
-            console.log(response.response)
+          console.log(response.response)
+          setTimeout(() => navigate("/"), 2000);
         })
         promise.catch(error => {
             console.log(error.response.data)
+            setTimeout(() => setLoading(false), 2000);
         })
     }
 
@@ -42,7 +47,7 @@ export default function RegisterPage() {
                 <input type="text" name="name" id="name" placeholder="name" value={name} onChange={e => { setName(e.target.value) }}/>
               <label htmlFor="image"></label>
                 <input type="text" name="image" id="image" placeholder="image" value={image} onChange={e => { setImage(e.target.value) }}/>
-              <button type="submit">Register</button>
+                {loading ? <button disabled> <ThreeDots color="#fff" /></button> : <button type="submit">Register</button>}
         </form>
         <Link to="/">
             <span className="registered">Já tem uma conta? Faça login!</span>
@@ -87,6 +92,9 @@ const PageContainer = styled.div`
         background: #52B6FF;
         border-radius: 4.63636px;
         border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .registered{
         width: 232px;

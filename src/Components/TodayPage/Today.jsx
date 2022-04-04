@@ -2,7 +2,8 @@ import * as dayjs from 'dayjs'
 import styled from "styled-components"
 import { useEffect, useState } from 'react'
 import axios from "axios"
-import { useToken } from '../Contexts/UserContext'
+import { useToken, useURL} from '../Contexts/UserContext'
+import { ThreeDots } from 'react-loader-spinner'
 
 import Header from "../PublicComponents/Header"
 import Footer from "../PublicComponents/Footer"
@@ -46,7 +47,7 @@ export default function Today(){
             <Content>
                 <div className='today'>
                     <h2>{dayjs().locale('pt-br').format('dddd, DD/MM')}</h2>
-                    <h4 progress={progress} >{progress > 0 ? `${progress.toFixed()}% dos hábitos concluídos` : `Nenhum hábito concluído ainda`}</h4>
+                    {progress > 0 ? <H4 color="#8FC549">{progress.toFixed()}% dos hábitos concluídos</H4> : <H4 color='#BABABA'>Nenhum hábito concluído ainda</H4>}
                     <div className='Habits'>
                         {habits.map(habit => 
                         <Habit title={habit.name} 
@@ -88,15 +89,17 @@ const Content = styled.div`
     width: 90%;
     display: flex;
     flex-direction: column;
+    margin: 70px 0;
     .today{
         margin: 30px 0;
     }
-    .today h4{
-        color: ${props => props.progress > 0 ? `#BABABA` : `#8FC549`};
-    }
+    
     .Habits{
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 `
+const H4 = styled.h4`
+    color: ${props => props.color};
+    `

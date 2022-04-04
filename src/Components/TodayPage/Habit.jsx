@@ -47,10 +47,10 @@ export default function Habit(props){
     }
     return (
         <HabitContainer> 
-            <span>{title}</span>
+            <h5>{title}</h5>
             <div className='infos'>
-                <span>Sequência atual: {sequence} dias</span>
-                <span>Seu recorde: {record} dias</span>
+                {sequence == record ? <Span color="#8FC549">Sequência atual: {sequence} dias</Span> : <Span>Sequência atual: {sequence} dias</Span> }
+                {sequence == record ? <Span color="#8FC549">Seu recorde: {record} dias</Span> : <Span>Seu recorde: {record} dias</Span>}
             </div>
             
             <IoCheckbox className="Check" onClick={toggleCheckHabit} color={background}/>
@@ -68,8 +68,7 @@ const HabitContainer = styled.div`
     margin-top: 10px;
     border-radius: 5px;
     position: relative;
-
-    span{
+    h5{
         font-family: 'Lexend Deca';
         font-style: normal;
         font-weight: 400;
@@ -81,15 +80,14 @@ const HabitContainer = styled.div`
     .infos{
         display: flex;
         flex-direction: column;
-        span{
-            font-family: 'Lexend Deca';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 12.976px;
-            line-height: 16px;
-
-            color: #666666;
-        }
+    }
+    .infos Span{
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12.976px;
+        line-height: 16px;
+        color: ${ props => props.color };
     }
     .IoCheckbox{
         color: #666666;
@@ -107,4 +105,12 @@ const HabitContainer = styled.div`
         align-items: center;
         justify-content: center;
     }
+`
+const Span = styled.span`
+    font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12.976px;
+        line-height: 16px;
+        color: ${ props => props.color };
 `

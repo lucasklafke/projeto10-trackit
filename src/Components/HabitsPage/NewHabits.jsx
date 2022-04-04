@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useState } from "react"
 import { useToken } from "../Contexts/UserContext"
 import axios from "axios"
+import { ThreeDots } from "react-loader-spinner"
 
 import Header from '../PublicComponents/Header'
 import Footer from '../PublicComponents/Footer'
@@ -12,11 +13,14 @@ export default function NewHabit(props){
     const [days,setDays] = useState([])
     const {token} = useToken()
     const week = ["D", "S", "T", "Q", "Q", "S", "S"]
+    const [loading, setLoading] = useState(false)
+
     function clearForm(){
         setHabit([])
         setDays([])
     }
     function handleSubmit(){
+        setLoading(true)
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -30,17 +34,19 @@ export default function NewHabit(props){
         const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
         const promise = axios.post(url,obj,config)
         promise.then(response => {
-            alert("Hábito cadastrado com sucesso!")
+            setTimeout(() => alert("Hábito cadastrado com sucesso!"), 3000);
 
-            clearForm()
-            props.setNewHabit(false)
+            setTimeout(() => clearForm(), 3000)
+            setTimeout(() => props.setNewHabit(false), 3000);
+            setTimeout(() => setLoading(false), 3000);
             props.getHabits()
         })
         promise.catch(error => {
             console.log(error.response)
-            alert('Erro ao cadastrar hábito')
-            clearForm()
-            props.setNewHabit(false)
+            setTimeout( () => alert('Erro ao cadastrar hábito'), 3000);
+            setTimeout(() => setLoading(false), 3000);
+            setTimeout(() => clearForm(), 3000);
+            setTimeout(  () =>  clearForm(),3000)
         })
     }
     function setSelected(event,index){
@@ -61,7 +67,7 @@ export default function NewHabit(props){
                 </div>
                 <div className="continue">
                     <button>Cancel</button>
-                    <button onClick={handleSubmit}>Save</button>
+                    {loading ? <button ><ThreeDots color='white' /></button> : <button onClick={handleSubmit}>Save</button>}
                 </div>
             </Content>
         </PageContainer>

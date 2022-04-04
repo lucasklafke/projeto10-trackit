@@ -38,12 +38,12 @@ const FooterContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    position: absolute;
+    position: fixed;
     height: 70px;
     left: 0;
     bottom: 0;
     background: #FFFFFF;
-
+    margin-top: 100px;
     .CircularProgressbar{
         width: 91px;
         height: 91px;

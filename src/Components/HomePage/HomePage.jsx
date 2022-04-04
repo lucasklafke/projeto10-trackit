@@ -2,9 +2,10 @@ import {useState, useEffect, useContext} from 'react';
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios"
+import { ThreeDots } from 'react-loader-spinner';
 
 import {useToken} from '../Contexts/UserContext'
-
+import {useURL} from '../Contexts/UserContext'
 import trackit from "../../assets/img/trackit.png";
 
 //lucasnkz11@gmail.com
@@ -15,9 +16,11 @@ export default function HomePage() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const {token,setToken} = useToken()
-
+    const {URL,setURL} = useURL()
+    const [loading, setLoading] = useState(false);
     function handleSubmit(event) {
         event.preventDefault();
+        setLoading(true);
         let token = 0 
         // const config ={
         //     headers: {
@@ -32,14 +35,16 @@ export default function HomePage() {
         const promise = axios.post(URL,info)
         promise.then(response => {
             token = response.data.token
-            // console.log(response.data)
+            console.log(response.data)
             // console.log(token)
             setToken(response.data.token)
+            setURL(response.data.image)
             console.log(token)
-            navigate("/today")
+            setTimeout(()=> navigate("/today"),2000)
         })
         promise.catch(error => {
             console.log(error.response)
+            setTimeout(() => setLoading(false), 2000);
         })
     }
 
@@ -53,10 +58,9 @@ export default function HomePage() {
               <input type="text" name="email" id="email" placeholder="email" value={email} onChange={e => { setEmail(e.target.value) }}/>
             <label htmlFor=""></label>
               <input type="text" name="password" id="password" placeholder="password" value={password} onChange={e => { setPassword(e.target.value) }}/>
-            
-                <button type="submit">Entrar</button>
+              {loading ? <button disabled><ThreeDots color='white'/></button> : <button type="submit">Entrar</button>}
         </form>
-        <Link to="/register">
+        <Link to="/register">   
             <span className="register">Não tem uma conta? Cadastre-se!</span>
         </Link>
     </PageContainer>
@@ -99,6 +103,9 @@ const PageContainer = styled.div`
         background: #52B6FF;
         border-radius: 4.63636px;
         border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .register{
         width: 232px;
